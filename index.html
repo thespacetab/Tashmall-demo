@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Tashmall — Главная</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header>
+			<h1>🛒 Tashmall</h1>
+			<a href="cart.html" class="cart-link">Корзина</a>
+		</header>
+		<main>
+			<h2>Магазины</h2>
+			<div id="shops-list"></div>
+		</main>
+		<script src="script.js"></script>
+		<script>
+			// Показываем список магазинов
+			fetch('http://localhost:8000/api/shops')
+				.then(res => res.json())
+				.then(data => {
+					let shopsDiv = document.getElementById('shops-list')
+					data.forEach(shop => {
+						let el = document.createElement('div')
+						el.className = 'shop-card'
+						el.innerHTML = `<a href="shop.html?shop_id=${shop.id}"><strong>${shop.name}</strong></a>`
+						shopsDiv.appendChild(el)
+					})
+				})
+		</script>
+	</body>
+</html>

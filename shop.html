@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Магазин — Tashmall</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header>
+			<a href="index.html">← Назад</a>
+			<h1>Магазин</h1>
+			<a href="cart.html" class="cart-link">Корзина</a>
+		</header>
+		<main>
+			<div id="products-list"></div>
+		</main>
+		<script src="script.js"></script>
+		<script>
+			// Получаем shop_id из URL
+			const params = new URLSearchParams(location.search)
+			const shop_id = params.get('shop_id')
+			fetch(`http://localhost:8000/api/products/${shop_id}`)
+				.then(res => res.json())
+				.then(products => {
+					let list = document.getElementById('products-list')
+					products.forEach(p => {
+						let el = document.createElement('div')
+						el.className = 'product-card'
+						el.innerHTML = `
+                    <strong>${p.name}</strong><br>
+                    <span>Цена: <b>${p.price}₸</b></span><br>
+                    <button onclick="addToCart(${p.id}, '${p.name}', ${p.price})">Добавить в корзину</button>
+                    <p>${p.description}</p>
+                `
+						list.appendChild(el)
+					})
+				})
+		</script>
+	</body>
+</html>

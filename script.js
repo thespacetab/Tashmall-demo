@@ -1,32 +1,30 @@
-// ======= Tashmall WebApp (обновлено для заказов) =======
-
-const API_URL = "http://localhost:8000/api";
-
-// ======= Корзина =======
-function addToCart(productId, name, price, shopId) {
+// Функция для добавления товара в корзину
+function addToCart(productId, name, price) {
 	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
-	let found = cart.find(item => item.productId === productId)
-	if (found) {
-		found.qty += 1
+	let item = cart.find(i => i.productId === productId)
+	if (item) {
+		item.qty += 1
 	} else {
-		cart.push({ productId, name, price, qty: 1, shopId })
+		cart.push({ productId, name, price, qty: 1 })
 	}
-	localStorage.setItem('cart', JSON.stringify(cart))
-	alert('Товар добавлен в корзину!')
-}
-
-function removeFromCart(productId) {
-	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
-	cart = cart.filter(item => item.productId !== productId)
 	localStorage.setItem('cart', JSON.stringify(cart))
 	showCart()
 }
 
+// Функция для удаления товара из корзины
+function removeFromCart(productId) {
+	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+	cart = cart.filter(i => i.productId !== productId)
+	localStorage.setItem('cart', JSON.stringify(cart))
+	showCart()
+}
+
+// Функция отображения содержимого корзины
 function showCart() {
 	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
 	let cartDiv = document.getElementById('cart-list')
 	let totalDiv = document.getElementById('cart-total')
-	let buttonDiv = document.getElementById('cart-action')
+	let buttonDiv = document.getElementById('cart-action') // <--- обязательно нужен этот div в html!
 	cartDiv.innerHTML = ''
 	let total = 0
 	cart.forEach(item => {
@@ -43,90 +41,46 @@ function showCart() {
 	}
 }
 
-// ======= Оформление заказа =======
+// Функция оформления заказа
 function checkoutOrder() {
 	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
 	if (!cart.length) {
-		alert("Корзина пуста")
+		alert('Корзина пуста!')
 		return
 	}
-	let shop_id = cart[0].shopId
-	// Для демо — спросим user_id вручную, в реальном проекте получить из Telegram WebApp API!
-	let buyer_id = window.tgUserId || prompt("Введите ваш user_id (Telegram):")
-	const items = cart.map(item => ({
-		product_id: item.productId,
-		qty: item.qty,
-		price_snapshot: item.price
-	}))
-	fetch(`${API_URL}/orders`, {
-		method: "POST",
-		headers: {"Content-Type": "application/json"},
-		body: JSON.stringify({buyer_id: buyer_id, shop_id: shop_id, items: items})
+	let user_id = localStorage.getItem('user_id') || prompt('Введите ваш Telegram user_id (или id покупателя):')
+	if (!user_id) {
+		alert('Необходимо ввести user_id!')
+		return
+	}
+	let shop_id = localStorage.getItem('shop_id')
+	if (!shop_id && cart.length > 0 && cart[0].shopId) {
+		shop_id = cart[0].shopId
+	}
+	// Можно добавить передачу shop_id если нужно
+	fetch('http://localhost:8000/api/orders', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			user_id,
+			cart
+		})
 	})
-	.then(res => res.json())
+	.then(res => {
+		if (res.ok) return res.json()
+		throw new Error('Ошибка оформления заказа')
+	})
 	.then(data => {
-		if (data.success) {
-			localStorage.removeItem('cart')
-			alert('Заказ успешно оформлен!')
-			showCart()
-			showMyOrders(buyer_id)
-		} else {
-			alert('Ошибка оформления заказа')
-		}
+		alert('Заказ успешно оформлен!')
+		localStorage.removeItem('cart')
+		showCart()
+	})
+	.catch(err => {
+		alert('Ошибка оформления заказа: ' + err.message)
 	})
 }
 
-// ======= Отображение заказов пользователя =======
-function showMyOrders(user_id) {
-	fetch(`${API_URL}/orders/${user_id}`)
-	.then(res => res.json())
-	.then(orders => {
-		let el = document.getElementById("myorders")
-		if (!el) return
-		if (!orders.length) {
-			el.innerHTML = "<i>У вас нет заказов</i>"
-			return
-		}
-		let html = ""
-		for (let o of orders) {
-			let order = o.order
-			html += `<div style="border:1px solid #888;margin:8px;padding:8px;">
-				<b>Заказ №${order.id}</b><br>
-				Статус: ${order.status}<br>
-				Дата: ${order.created_at}<br>
-				<ul>`
-			for (let it of o.items) {
-				html += `<li>${it.name} — ${it.qty} x ${it.price_snapshot}</li>`
-			}
-			html += "</ul></div>"
-		}
-		el.innerHTML = html
-	})
-}
-
-// ======= Загрузка товаров (пример) =======
-function loadProducts(shopId) {
-	fetch(`${API_URL}/products/${shopId}`)
-	.then(res => res.json())
-	.then(products => {
-		let productsEl = document.getElementById("products")
-		if (!productsEl) return
-		let html = ""
-		for (let p of products) {
-			html += `<div style="border:1px solid #ccc;margin:8px;padding:8px;">
-				<b>${p.name}</b><br>
-				<img src="${API_URL}/photo_telegram/${p.photo_file_id}" style="max-width:120px"><br>
-				Цена: ${p.price}<br>
-				<button onclick='addToCart(${p.id}, "${p.name}", ${p.price}, ${p.shop_id})'>В корзину</button>
-			</div>`
-		}
-		productsEl.innerHTML = html
-	})
-}
-
-// ======= Инициализация =======
+// Функция для отображения корзины при загрузке страницы
 window.onload = function() {
-	showCart()
-	let user_id = window.tgUserId || 1 // или получить user_id из Telegram WebApp
-	showMyOrders(user_id)
+	if (typeof showCart === 'function') showCart()
 }

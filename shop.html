@@ -28,7 +28,7 @@
                     el.className = 'product-card'
                     el.innerHTML = `
                         <div class="product-row">
-                            ${p.photo_file_id ? `<img class="product-img" src="http://localhost:8000/api/photo/${p.photo_file_id}" alt="Фото товара" onerror="this.style.display='none'">` : ''}
+                            ${p.photo_file_id ? `<img class="product-img" src="http://localhost:8000/api/photo_telegram/${p.photo_file_id}" alt="Фото товара" onerror="this.style.display='none'">` : ''}
                             <div class="product-details">
                                 <strong>${p.name}</strong><br>
                                 <span>Цена: <b>${p.price}₸</b></span><br>

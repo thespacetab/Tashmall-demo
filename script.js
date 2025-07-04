@@ -43,41 +43,36 @@ function showCart() {
 
 // Функция оформления заказа
 function checkoutOrder() {
-	let cart = JSON.parse(localStorage.getItem('cart') || '[]')
-	if (!cart.length) {
-		alert('Корзина пуста!')
-		return
-	}
-	let user_id = localStorage.getItem('user_id') || prompt('Введите ваш Telegram user_id (или id покупателя):')
-	if (!user_id) {
-		alert('Необходимо ввести user_id!')
-		return
-	}
-	let shop_id = localStorage.getItem('shop_id')
-	if (!shop_id && cart.length > 0 && cart[0].shopId) {
-		shop_id = cart[0].shopId
-	}
-	// Можно добавить передачу shop_id если нужно
-	fetch('http://localhost:8000/api/orders', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({
-			user_id,
-			cart
-		})
-	})
-	.then(res => {
-		if (res.ok) return res.json()
-		throw new Error('Ошибка оформления заказа')
-	})
-	.then(data => {
-		alert('Заказ успешно оформлен!')
-		localStorage.removeItem('cart')
-		showCart()
-	})
-	.catch(err => {
-		alert('Ошибка оформления заказа: ' + err.message)
-	})
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    if (!cart.length) {
+        alert('Корзина пуста!')
+        return
+    }
+    let user_id = localStorage.getItem('user_id') || prompt('Введите ваш Telegram user_id (или id покупателя):')
+    if (!user_id) {
+        alert('Необходимо ввести user_id!')
+        return
+    }
+    fetch('http://localhost:8000/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            buyer_id: user_id, // <-- вот так!
+            cart
+        })
+    })
+    .then(res => {
+        if (res.ok) return res.json()
+        throw new Error('Ошибка оформления заказа')
+    })
+    .then(data => {
+        alert('Заказ успешно оформлен!')
+        localStorage.removeItem('cart')
+        showCart()
+    })
+    .catch(err => {
+        alert('Ошибка оформления заказа: ' + err.message)
+    })
 }
 
 // Функция для отображения корзины при загрузке страницы

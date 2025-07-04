@@ -19,26 +19,55 @@
         // Получаем shop_id из URL
         const params = new URLSearchParams(location.search)
         const shop_id = params.get('shop_id')
+
+        function escapeHtml(text) {
+            // Simple escaping to prevent XSS in product names/descriptions
+            return text.replace(/[&<>"']/g, function(m) {
+                return ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                })[m];
+            });
+        }
+
+        function renderProducts(products) {
+            const list = document.getElementById('products-list')
+            list.innerHTML = ''
+            if (!Array.isArray(products) || products.length === 0) {
+                list.innerHTML = '<p>Товаров пока нет.</p>'
+                return
+            }
+            products.forEach(p => {
+                // Если file_id пустой, не показывать картинку
+                let imgBlock = ''
+                if (p.photo_file_id && typeof p.photo_file_id === 'string' && p.photo_file_id.length > 10) {
+                    imgBlock = `<img class="product-img" src="http://localhost:8000/api/photo_telegram/${encodeURIComponent(p.photo_file_id)}" alt="Фото товара" onerror="this.style.display='none'">`
+                }
+                let el = document.createElement('div')
+                el.className = 'product-card'
+                el.innerHTML = `
+                    <div class="product-row">
+                        ${imgBlock}
+                        <div class="product-details">
+                            <strong>${escapeHtml(p.name || '')}</strong><br>
+                            <span>Цена: <b>${p.price}₸</b></span><br>
+                            <button onclick="addToCart(${p.id}, '${escapeHtml(p.name || '')}', ${p.price})">Добавить в корзину</button>
+                            <p>${escapeHtml(p.description || '')}</p>
+                        </div>
+                    </div>
+                `
+                list.appendChild(el)
+            })
+        }
+
         fetch(`http://localhost:8000/api/products/${shop_id}`)
             .then(res => res.json())
-            .then(products => {
-                let list = document.getElementById('products-list')
-                products.forEach(p => {
-                    let el = document.createElement('div')
-                    el.className = 'product-card'
-                    el.innerHTML = `
-                        <div class="product-row">
-                            ${p.photo_file_id ? `<img class="product-img" src="http://localhost:8000/api/photo_telegram/${p.photo_file_id}" alt="Фото товара" onerror="this.style.display='none'">` : ''}
-                            <div class="product-details">
-                                <strong>${p.name}</strong><br>
-                                <span>Цена: <b>${p.price}₸</b></span><br>
-                                <button onclick="addToCart(${p.id}, '${p.name}', ${p.price})">Добавить в корзину</button>
-                                <p>${p.description}</p>
-                            </div>
-                        </div>
-                    `
-                    list.appendChild(el)
-                })
+            .then(renderProducts)
+            .catch(() => {
+                document.getElementById('products-list').innerHTML = '<p>Ошибка загрузки товаров.</p>'
             })
     </script>
 </body>

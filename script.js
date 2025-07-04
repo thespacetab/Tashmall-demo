@@ -53,11 +53,17 @@ function checkoutOrder() {
         alert('Необходимо ввести user_id!')
         return
     }
+    let shop_id = localStorage.getItem('shop_id') || prompt('Введите shop_id магазина:')
+    if (!shop_id) {
+        alert('Необходимо ввести shop_id!')
+        return
+    }
     fetch('http://localhost:8000/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            buyer_id: user_id, // <-- вот так!
+            buyer_id: user_id,
+            shop_id: shop_id,
             cart
         })
     })

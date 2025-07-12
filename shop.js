@@ -34,6 +34,14 @@ class ShopPage {
     }
 
     setupEventListeners() {
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => this.toggleMobileMenu());
+        
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => this.closeMobileMenu());
+        });
+
         // Cart controls
         document.getElementById('cart-btn')?.addEventListener('click', () => this.toggleCart());
         document.getElementById('close-cart')?.addEventListener('click', () => this.closeCart());
@@ -444,6 +452,40 @@ class ShopPage {
         // Replace with your actual bot username
         const botUrl = 'https://t.me/your_commercio_bot';
         window.open(botUrl, '_blank');
+    }
+
+    toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        const toggle = document.getElementById('mobile-menu-toggle');
+        
+        if (nav && toggle) {
+            nav.classList.toggle('active');
+            
+            // Change icon
+            const icon = toggle.querySelector('i');
+            if (icon) {
+                if (nav.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
+            }
+        }
+    }
+
+    closeMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        const toggle = document.getElementById('mobile-menu-toggle');
+        
+        if (nav && toggle) {
+            nav.classList.remove('active');
+            
+            // Reset icon
+            const icon = toggle.querySelector('i');
+            if (icon) {
+                icon.className = 'fas fa-bars';
+            }
+        }
     }
 }
 

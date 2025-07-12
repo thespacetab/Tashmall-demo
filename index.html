@@ -24,13 +24,9 @@
                     <a href="#about" class="nav-link">О нас</a>
                 </nav>
                 <div class="header-actions">
-                    <button class="btn btn-secondary" id="login-btn">
-                        <i class="fas fa-user"></i>
-                        Войти
-                    </button>
-                    <button class="btn btn-primary" id="register-btn">
-                        <i class="fas fa-plus"></i>
-                        Регистрация
+                    <button class="btn btn-primary" id="telegram-btn">
+                        <i class="fab fa-telegram"></i>
+                        Telegram Bot
                     </button>
                 </div>
             </div>
@@ -49,9 +45,9 @@
                         Создавайте, управляйте и масштабируйте свой бизнес с помощью современных инструментов и сильного сообщества партнеров
                     </p>
                     <div class="hero-actions">
-                        <button class="btn btn-primary btn-large" id="start-btn">
-                            <i class="fas fa-rocket"></i>
-                            Начать сейчас
+                        <button class="btn btn-primary btn-large" id="telegram-start-btn">
+                            <i class="fab fa-telegram"></i>
+                            Открыть в Telegram
                         </button>
                         <button class="btn btn-outline btn-large" id="demo-btn">
                             <i class="fas fa-play"></i>
@@ -216,52 +212,32 @@
         </div>
     </footer>
 
-    <!-- Modals -->
-    <div id="login-modal" class="modal">
+    <!-- Telegram Info Modal -->
+    <div id="telegram-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Вход в систему</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="login-username">Имя пользователя</label>
-                    <input type="text" id="login-username" required>
+            <h2>Telegram Bot</h2>
+            <div style="text-align: center; padding: 2rem 0;">
+                <i class="fab fa-telegram" style="font-size: 4rem; color: #0088cc; margin-bottom: 1rem;"></i>
+                <h3>Commercio Bot</h3>
+                <p>Для регистрации и управления аккаунтом используйте нашего Telegram бота</p>
+                <div style="margin: 2rem 0;">
+                    <a href="https://t.me/your_commercio_bot" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                        Открыть в Telegram
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="login-password">Пароль</label>
-                    <input type="password" id="login-password" required>
+                <div style="background: #f3f4f6; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>Возможности бота:</h4>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li>📝 Регистрация и вход</li>
+                        <li>🏪 Управление магазинами</li>
+                        <li>📦 Добавление товаров</li>
+                        <li>📊 Просмотр статистики</li>
+                        <li>📅 Участие в мероприятиях</li>
+                    </ul>
                 </div>
-                <button type="submit" class="btn btn-primary">Войти</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Регистрация</h2>
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="register-username">Имя пользователя</label>
-                    <input type="text" id="register-username" required>
-                </div>
-                <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" id="register-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="register-password">Пароль</label>
-                    <input type="password" id="register-password" required>
-                </div>
-                <div class="form-group">
-                    <label for="register-role">Роль</label>
-                    <select id="register-role" required>
-                        <option value="buyer">Покупатель</option>
-                        <option value="seller">Продавец</option>
-                        <option value="partner">Партнер</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-            </form>
+            </div>
         </div>
     </div>
 

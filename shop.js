@@ -57,6 +57,9 @@ class ShopPage {
         document.getElementById('price-max')?.addEventListener('input', (e) => {
             this.filters.priceMax = e.target.value;
         });
+        
+        // Telegram button
+        document.getElementById('telegram-btn')?.addEventListener('click', () => this.openTelegramBot());
     }
 
     async loadShopData() {
@@ -438,6 +441,12 @@ class ShopPage {
                 </div>
             `;
         }
+    }
+
+    openTelegramBot() {
+        // Replace with your actual bot username
+        const botUrl = 'https://t.me/your_commercio_bot';
+        window.open(botUrl, '_blank');
     }
 }
 

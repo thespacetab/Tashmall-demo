@@ -14,8 +14,7 @@ class CommercioApp {
 
     setupEventListeners() {
         // Header buttons
-        document.getElementById('login-btn')?.addEventListener('click', () => this.showModal('login-modal'));
-        document.getElementById('register-btn')?.addEventListener('click', () => this.showModal('register-modal'));
+        document.getElementById('telegram-btn')?.addEventListener('click', () => this.showTelegramModal());
         
         // Modal close buttons
         document.querySelectorAll('.close').forEach(btn => {
@@ -29,17 +28,13 @@ class CommercioApp {
             });
         });
 
-        // Forms
-        document.getElementById('login-form')?.addEventListener('submit', (e) => this.handleLogin(e));
-        document.getElementById('register-form')?.addEventListener('submit', (e) => this.handleRegister(e));
-
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => this.smoothScroll(e));
         });
 
         // Action buttons
-        document.getElementById('start-btn')?.addEventListener('click', () => this.handleStart());
+        document.getElementById('telegram-start-btn')?.addEventListener('click', () => this.openTelegramBot());
         document.getElementById('demo-btn')?.addEventListener('click', () => this.handleDemo());
         document.getElementById('view-all-events')?.addEventListener('click', () => this.navigateToEvents());
 
@@ -273,88 +268,18 @@ class CommercioApp {
         }
     }
 
-    async handleLogin(e) {
-        e.preventDefault();
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-
-        try {
-            const response = await fetch(`${this.apiBase}/user_by_username/${username}`);
-            if (response.ok) {
-                const user = await response.json();
-                if (user.password === password) { // In real app, use proper authentication
-                    this.currentUser = user;
-                    this.closeModal(document.getElementById('login-modal'));
-                    this.updateHeaderForUser();
-                    this.showNotification('Успешный вход!', 'success');
-                } else {
-                    this.showNotification('Неверный пароль', 'error');
-                }
-            } else {
-                this.showNotification('Пользователь не найден', 'error');
-            }
-        } catch (error) {
-            this.showNotification('Ошибка входа', 'error');
-        }
+    showTelegramModal() {
+        this.showModal('telegram-modal');
     }
 
-    async handleRegister(e) {
-        e.preventDefault();
-        const username = document.getElementById('register-username').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const role = document.getElementById('register-role').value;
-
-        try {
-            const response = await fetch(`${this.apiBase}/user`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    telegram_id: Math.floor(Math.random() * 1000000), // Mock telegram_id
-                    name: username,
-                    role: role,
-                    password: password
-                })
-            });
-
-            if (response.ok) {
-                this.closeModal(document.getElementById('register-modal'));
-                this.showNotification('Регистрация успешна!', 'success');
-            } else {
-                const error = await response.json();
-                this.showNotification(error.error === 'name taken' ? 'Имя пользователя занято' : 'Ошибка регистрации', 'error');
-            }
-        } catch (error) {
-            this.showNotification('Ошибка регистрации', 'error');
-        }
-    }
-
-    updateHeaderForUser() {
-        const headerActions = document.querySelector('.header-actions');
-        if (headerActions && this.currentUser) {
-            headerActions.innerHTML = `
-                <span class="user-welcome">Привет, ${this.currentUser.name}!</span>
-                <button class="btn btn-secondary" onclick="app.logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Выйти
-                </button>
-            `;
-        }
-    }
-
-    logout() {
-        this.currentUser = null;
-        location.reload();
+    openTelegramBot() {
+        // Replace with your actual bot username
+        const botUrl = 'https://t.me/your_commercio_bot';
+        window.open(botUrl, '_blank');
     }
 
     handleStart() {
-        if (this.currentUser) {
-            window.location.href = 'dashboard.html';
-        } else {
-            this.showModal('register-modal');
-        }
+        this.openTelegramBot();
     }
 
     handleDemo() {

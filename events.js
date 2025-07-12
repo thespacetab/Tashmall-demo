@@ -37,6 +37,9 @@ class EventsPage {
 
         // Registration form
         document.getElementById('registration-form')?.addEventListener('submit', (e) => this.handleRegistration(e));
+        
+        // Telegram button
+        document.getElementById('telegram-btn')?.addEventListener('click', () => this.openTelegramBot());
     }
 
     async loadEvents() {
@@ -390,6 +393,12 @@ class EventsPage {
         } catch (error) {
             this.showNotification('Ошибка регистрации. Попробуйте еще раз.', 'error');
         }
+    }
+
+    openTelegramBot() {
+        // Replace with your actual bot username
+        const botUrl = 'https://t.me/your_commercio_bot';
+        window.open(botUrl, '_blank');
     }
 
     showModal(modalId) {

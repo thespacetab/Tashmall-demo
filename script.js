@@ -39,7 +39,7 @@ class CommercioApp {
         // Action buttons
         document.getElementById('telegram-start-btn')?.addEventListener('click', () => this.openTelegramBot());
         document.getElementById('demo-btn')?.addEventListener('click', () => this.handleDemo());
-        document.getElementById('explore-innovations')?.addEventListener('click', () => this.exploreInnovations());
+        document.getElementById('explore-creative')?.addEventListener('click', () => this.exploreCreativeLab());
 
         // Header scroll effect
         window.addEventListener('scroll', () => this.handleScroll());
@@ -324,11 +324,11 @@ class CommercioApp {
         this.showNotification('Демо режим будет доступен скоро!', 'info');
     }
 
-    exploreInnovations() {
-        this.showNotification('Открываем лабораторию инноваций...', 'info');
-        // Here you would typically navigate to innovations page or show more details
+    exploreCreativeLab() {
+        this.showNotification('🎨 Открываем креативную лабораторию...', 'info');
+        // Here you would typically navigate to creative lab page or show more details
         setTimeout(() => {
-            this.showNotification('🚀 Добро пожаловать в будущее!', 'success');
+            this.showNotification('✨ Добро пожаловать в мир творчества!', 'success');
         }, 1000);
     }
 

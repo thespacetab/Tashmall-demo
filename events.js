@@ -37,9 +37,6 @@ class EventsPage {
 
         // Registration form
         document.getElementById('registration-form')?.addEventListener('submit', (e) => this.handleRegistration(e));
-        
-        // Telegram button
-        document.getElementById('telegram-btn')?.addEventListener('click', () => this.openTelegramBot());
     }
 
     async loadEvents() {

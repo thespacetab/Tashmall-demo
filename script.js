@@ -13,9 +13,6 @@ class CommercioApp {
     }
 
     setupEventListeners() {
-        // Header buttons
-        document.getElementById('telegram-btn')?.addEventListener('click', () => this.showTelegramModal());
-        
         // Modal close buttons
         document.querySelectorAll('.close').forEach(btn => {
             btn.addEventListener('click', (e) => this.closeModal(e.target.closest('.modal')));

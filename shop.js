@@ -57,9 +57,6 @@ class ShopPage {
         document.getElementById('price-max')?.addEventListener('input', (e) => {
             this.filters.priceMax = e.target.value;
         });
-        
-        // Telegram button
-        document.getElementById('telegram-btn')?.addEventListener('click', () => this.openTelegramBot());
     }
 
     async loadShopData() {

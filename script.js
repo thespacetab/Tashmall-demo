@@ -37,9 +37,9 @@ class CommercioApp {
         });
 
         // Action buttons
-        document.getElementById('telegram-start-btn')?.addEventListener('click', () => this.openTelegramBot());
-        document.getElementById('demo-btn')?.addEventListener('click', () => this.handleDemo());
-        document.getElementById('explore-creative')?.addEventListener('click', () => this.exploreCreativeLab());
+        document.getElementById('start-selling-btn')?.addEventListener('click', () => this.startSelling());
+        document.getElementById('browse-catalog-btn')?.addEventListener('click', () => this.browseCatalog());
+        document.getElementById('explore-features')?.addEventListener('click', () => this.exploreFeatures());
 
         // Header scroll effect
         window.addEventListener('scroll', () => this.handleScroll());
@@ -319,17 +319,21 @@ class CommercioApp {
         }
     }
 
-    handleDemo() {
-        // Show demo modal or navigate to demo page
-        this.showNotification('Демо режим будет доступен скоро!', 'info');
+    startSelling() {
+        this.showNotification('🛒 Начните продавать прямо сейчас!', 'info');
+        // Здесь можно добавить логику для регистрации продавца
+        setTimeout(() => {
+            this.showNotification('✨ Регистрация продавца открыта!', 'success');
+        }, 1000);
     }
 
-    exploreCreativeLab() {
-        this.showNotification('🎨 Открываем креативную лабораторию...', 'info');
-        // Here you would typically navigate to creative lab page or show more details
-        setTimeout(() => {
-            this.showNotification('✨ Добро пожаловать в мир творчества!', 'success');
-        }, 1000);
+    browseCatalog() {
+        window.location.href = 'shop.html';
+    }
+
+    exploreFeatures() {
+        this.showNotification('🛒 Изучайте возможности нашего маркетплейса!', 'info');
+        // Здесь можно добавить логику для показа подробной информации о возможностях
     }
 
     smoothScroll(e) {

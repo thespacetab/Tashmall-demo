@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Партнеры — Commercio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .partners-page {
+            padding-top: 100px;
+        }
+        
+        .partners-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .partners-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .partners-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .partners-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .partners-container {
+            padding: 4rem 0;
+        }
+        
+        .partners-filters {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .filters-content {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .filter-group select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .partner-card-large {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .partner-card-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .partner-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        .partner-name-large {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .partner-role-large {
+            color: #6366f1;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .partner-company {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .partner-stats-large {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .stat-label-small {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        .partner-actions {
+            margin-top: 1.5rem;
+        }
+        
+        .btn-contact {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-contact:hover {
+            transform: translateY(-2px);
+        }
+        
+        .become-partner-section {
+            background: #f9fafb;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .become-partner-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .benefit-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .partners-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>Commercio</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="events.html" class="nav-link">Мероприятия</a>
+                    <a href="partners.html" class="nav-link active">Партнеры</a>
+                    <a href="shops.html" class="nav-link">Магазины</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="login-btn">
+                        <i class="fas fa-user"></i>
+                        Войти
+                    </button>
+                    <button class="btn btn-primary" id="register-btn">
+                        <i class="fas fa-plus"></i>
+                        Регистрация
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Partners Hero -->
+    <section class="partners-hero">
+        <div class="container">
+            <h1>Наши партнеры</h1>
+            <p>Присоединяйтесь к сообществу успешных предпринимателей и развивайте свой бизнес вместе с нами</p>
+            
+            <div class="partners-stats">
+                <div class="stat-card">
+                    <span class="stat-number">1,234</span>
+                    <span class="stat-label">Активных партнеров</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">567</span>
+                    <span class="stat-label">Реализованных проектов</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">89</span>
+                    <span class="stat-label">Стран присутствия</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">$2.5M</span>
+                    <span class="stat-label">Общий оборот</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Filters -->
+    <section class="partners-filters">
+        <div class="container">
+            <div class="filters-content">
+                <div class="filter-group">
+                    <label>Роль:</label>
+                    <select id="role-filter">
+                        <option value="">Все роли</option>
+                        <option value="founder">Основатель</option>
+                        <option value="ceo">CEO</option>
+                        <option value="director">Директор</option>
+                        <option value="manager">Менеджер</option>
+                        <option value="consultant">Консультант</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Отрасль:</label>
+                    <select id="industry-filter">
+                        <option value="">Все отрасли</option>
+                        <option value="tech">Технологии</option>
+                        <option value="fashion">Мода</option>
+                        <option value="food">Еда</option>
+                        <option value="finance">Финансы</option>
+                        <option value="education">Образование</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="apply-filters">
+                    <i class="fas fa-filter"></i>
+                    Применить
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Container -->
+    <section class="partners-container">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Партнеры Commercio</h2>
+                <p class="section-description">Познакомьтесь с успешными предпринимателями нашего сообщества</p>
+            </div>
+            
+            <div class="partners-grid" id="partners-grid">
+                <!-- Partners will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Become Partner Section -->
+    <section class="become-partner-section">
+        <div class="container">
+            <div class="become-partner-content">
+                <h2 class="section-title">Станьте партнером Commercio</h2>
+                <p class="section-description">Присоединяйтесь к нашему сообществу и получите доступ к эксклюзивным возможностям</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="benefit-title">Нетворкинг</h3>
+                        <p class="benefit-description">Общайтесь с другими предпринимателями и находите партнеров для совместных проектов</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="benefit-title">Рост бизнеса</h3>
+                        <p class="benefit-description">Получите доступ к инструментам и ресурсам для масштабирования вашего бизнеса</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="benefit-title">Партнерская программа</h3>
+                        <p class="benefit-description">Зарабатывайте на привлечении новых партнеров и клиентов</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="benefit-title">Эксклюзивные события</h3>
+                        <p class="benefit-description">Участвуйте в закрытых мероприятиях и мастер-классах</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem;">
+                    <button class="btn btn-primary btn-large" id="become-partner-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Стать партнером
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-store"></i>
+                        <span>Commercio</span>
+                    </div>
+                    <p>Платформа для развития бизнеса и создания сильного сообщества предпринимателей</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Продукт</h4>
+                    <ul>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#pricing">Цены</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="#help">Помощь</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                        <li><a href="#docs">Документация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Социальные сети</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Commercio. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Become Partner Modal -->
+    <div id="become-partner-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Стать партнером Commercio</h2>
+            <form id="become-partner-form">
+                <div class="form-group">
+                    <label for="partner-name">Ваше имя</label>
+                    <input type="text" id="partner-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="partner-role">Роль</label>
+                    <select id="partner-role" required>
+                        <option value="">Выберите роль</option>
+                        <option value="founder">Основатель</option>
+                        <option value="ceo">CEO</option>
+                        <option value="director">Директор</option>
+                        <option value="manager">Менеджер</option>
+                        <option value="consultant">Консультант</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="partner-company">Компания</label>
+                    <input type="text" id="partner-company" required>
+                </div>
+                <div class="form-group">
+                    <label for="partner-email">Email</label>
+                    <input type="email" id="partner-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="partner-phone">Телефон</label>
+                    <input type="tel" id="partner-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="partner-description">О вашем бизнесе</label>
+                    <textarea id="partner-description" rows="4" placeholder="Расскажите о вашей компании и целях сотрудничества"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="partners.js"></script>
+</body>
+</html> 

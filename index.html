@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercio — Платформа для бизнеса и мероприятий</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>Commercio</span>
+                </div>
+                <nav class="nav">
+                    <a href="#events" class="nav-link">Мероприятия</a>
+                    <a href="#partners" class="nav-link">Партнеры</a>
+                    <a href="#shops" class="nav-link">Магазины</a>
+                    <a href="#about" class="nav-link">О нас</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="login-btn">
+                        <i class="fas fa-user"></i>
+                        Войти
+                    </button>
+                    <button class="btn btn-primary" id="register-btn">
+                        <i class="fas fa-plus"></i>
+                        Регистрация
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Платформа для <span class="highlight">бизнеса</span> и <span class="highlight">мероприятий</span>
+                    </h1>
+                    <p class="hero-description">
+                        Создавайте, управляйте и масштабируйте свой бизнес с помощью современных инструментов и сильного сообщества партнеров
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large" id="start-btn">
+                            <i class="fas fa-rocket"></i>
+                            Начать сейчас
+                        </button>
+                        <button class="btn btn-outline btn-large" id="demo-btn">
+                            <i class="fas fa-play"></i>
+                            Демо
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Рост бизнеса</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat">
+                                <span class="stat-number">+247%</span>
+                                <span class="stat-label">Прибыль</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-header">
+                            <i class="fas fa-users"></i>
+                            <span>Партнеры</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat">
+                                <span class="stat-number">1,234</span>
+                                <span class="stat-label">Активных</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ближайшие мероприятия</h2>
+                <p class="section-description">Присоединяйтесь к нашим событиям и развивайте свой бизнес</p>
+            </div>
+            <div class="events-grid" id="events-grid">
+                <!-- Events will be loaded here -->
+            </div>
+            <div class="section-actions">
+                <button class="btn btn-outline" id="view-all-events">
+                    <i class="fas fa-calendar"></i>
+                    Все мероприятия
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Наши партнеры</h2>
+                <p class="section-description">Присоединяйтесь к сообществу успешных предпринимателей</p>
+            </div>
+            <div class="partners-grid" id="partners-grid">
+                <!-- Partners will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shops Section -->
+    <section class="shops" id="shops">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Популярные магазины</h2>
+                <p class="section-description">Откройте для себя лучшие товары от проверенных продавцов</p>
+            </div>
+            <div class="shops-grid" id="shops-grid">
+                <!-- Shops will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Почему Commercio?</h2>
+                <p class="section-description">Все инструменты для успешного бизнеса в одном месте</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Telegram интеграция</h3>
+                    <p class="feature-description">Управляйте бизнесом прямо из Telegram с помощью нашего бота</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="feature-title">Аналитика</h3>
+                    <p class="feature-description">Подробная аналитика продаж, клиентов и эффективности</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="feature-title">Партнерская программа</h3>
+                    <p class="feature-description">Зарабатывайте на привлечении новых партнеров</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="feature-title">Мероприятия</h3>
+                    <p class="feature-description">Организуйте и участвуйте в бизнес-мероприятиях</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-store"></i>
+                        <span>Commercio</span>
+                    </div>
+                    <p>Платформа для развития бизнеса и создания сильного сообщества предпринимателей</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Продукт</h4>
+                    <ul>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#pricing">Цены</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="#help">Помощь</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                        <li><a href="#docs">Документация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Социальные сети</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Commercio. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Вход в систему</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Имя пользователя</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Регистрация</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Имя пользователя</label>
+                    <input type="text" id="register-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-role">Роль</label>
+                    <select id="register-role" required>
+                        <option value="buyer">Покупатель</option>
+                        <option value="seller">Продавец</option>
+                        <option value="partner">Партнер</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
